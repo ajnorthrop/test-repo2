@@ -17,19 +17,19 @@ library(tidyverse)
 library(broom)
 
 # Data import
-le_data <- read_csv("./data/Life-expectancy-by-state-long.csv")
+le_data <- read.csv("./data/Life-expectancy-by-state-long.csv")
 
 # Run a regression model with time coded using a linear term
-mod1 <- lm(LE ~ year, dat = le_data %>% filter(state == "California", race == "black", sex == "Female"))
+mod1 <- lm(LE ~ year+age+sex, dat = le_data %>% filter(state == "Ohio", race == "black", sex == "Female"))
 
 # Regression output
 tidy(mod1)
 
 # Plot the results
-ggplot(data = le_data %>% filter(state == "California", race == "black", sex == "Female"),
+ggplot(data = le_data %>% filter(state == "Ohio", race == "black", sex == "Female"),
        aes(x = year, y = LE)) + 
   geom_point() +
-  theme_bw() +
+  theme_void() +
   geom_abline(intercept = -232.4959533, slope = 0.1544538)
 
 # Save the plot
